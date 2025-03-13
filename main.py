@@ -9,12 +9,12 @@ def read_log_file(file_path):
             return file.readlines()
     except FileNotFoundError:
         print(f"에러: '{file_path}' 파일을 찾을 수 없습니다.")
-        return []
+        return 
     except Exception as e:
         print(f"알 수 없는 오류 발생: {e}")
-        return []
+        return 
 
-def display_logs(logs):
+def print_logs(logs):
     print('\n전체 로그 출력:')
     for log in logs:
         print(log.strip())
