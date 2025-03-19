@@ -1,0 +1,4 @@
+[tool.black]
+line-length = 79  # PEP 8 기본 권장값
+skip-string-normalization = true  # 단일 따옴표 유지 (' → " 변환 방지)
+include = '\.pyi?$'  # Python 파일(.py, .pyi)만 적용
