@@ -1,7 +1,7 @@
 # main.py
 # 2025-03-19
 
-FILE_NAME = 'Mars_Base_Inventory_List.csv'
+FILE_NAME = 'week02/Mars_Base_Inventory_List.csv'
 
 
 def get_data_from_csv():
