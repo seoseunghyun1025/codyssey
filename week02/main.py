@@ -4,6 +4,7 @@
 INPUT_FILE_NAME = 'week02/Mars_Base_Inventory_List.csv'
 OUTPUT_FILE_NAME_CSV = 'week02/Mars_Base_Inventory_danger.csv'
 OUTPUT_FILE_NAME_BIN = 'week02/Mars_Base_Inventory_List.bin'
+SUCCESS = f'Data successfully saved to {OUTPUT_FILE_NAME_CSV}'
 
 
 def get_data_from_csv():
@@ -60,7 +61,6 @@ def save_to_csv(data):
             file.write(','.join(header) + '\n')
             for row in data:
                 file.write(','.join(row) + '\n')
-        print(f"Data successfully saved to {OUTPUT_FILE_NAME_CSV}")
     except Exception as e:
         print(f"Error saving to CSV: {e}")
     return []
@@ -76,12 +76,12 @@ def save_to_binary_file(data):
 
                 file.write(length.to_bytes(4, 'big'))
                 file.write(row_bytes)
-        print(f"Data successfully saved to {OUTPUT_FILE_NAME_BIN}")
+        print(SUCCESS)
     except Exception as e:
         print(f"Error saving to binary file: {e}")
 
 
-def read_from_binary_file():
+def print_from_binary_file():
     try:
         with open(OUTPUT_FILE_NAME_BIN, 'rb') as file:
             while True:
@@ -93,7 +93,7 @@ def read_from_binary_file():
                 row_bytes = file.read(length)
                 row_data = row_bytes.decode('utf-8')
 
-                print(row_data)  # 읽어낸 데이터를 화면에 출력
+                print(row_data)
     except Exception as e:
         print(f"Error reading from binary file: {e}")
 
@@ -106,4 +106,4 @@ if __name__ == '__main__':
     print(filtered_inventory)
     save_to_csv(filtered_inventory)
     save_to_binary_file(filtered_inventory)
-    read_from_binary_file()
+    print_from_binary_file()
