@@ -2,7 +2,8 @@
 # 2025-03-19
 
 INPUT_FILE_NAME = 'week02/Mars_Base_Inventory_List.csv'
-OUTPUT_FILE_NAME = 'week02/Mars_Base_Inventory_danger.csv'
+OUTPUT_FILE_NAME_CSV = 'week02/Mars_Base_Inventory_danger.csv'
+OUTPUT_FILE_NAME_BIN = 'week02/Mars_Base_Inventory_List.bin'
 
 
 def get_data_from_csv():
@@ -48,7 +49,7 @@ def filter_flammability_above_0_7(sorted_inventory):
 
 def save_to_csv(data):
     try:
-        with open(OUTPUT_FILE_NAME, 'w', encoding='utf-8') as file:
+        with open(OUTPUT_FILE_NAME_CSV, 'w', encoding='utf-8') as file:
             header = [
                 "Substance",
                 "Weight (g/cm³)",
@@ -59,10 +60,25 @@ def save_to_csv(data):
             file.write(','.join(header) + '\n')
             for row in data:
                 file.write(','.join(row) + '\n')
-        print(f"Data successfully saved to {OUTPUT_FILE_NAME}")
+        print(f"Data successfully saved to {OUTPUT_FILE_NAME_CSV}")
     except Exception as e:
         print(f"Error saving to CSV: {e}")
     return []
+
+
+def save_to_binary_file(data):
+    try:
+        with open(OUTPUT_FILE_NAME_BIN, 'wb') as file:
+            for row in data:
+                row_data = ','.join(row)
+                row_bytes = row_data.encode('utf-8')
+                length = len(row_bytes)
+
+                file.write(length.to_bytes(4, 'big'))
+                file.write(row_bytes)
+        print(f"Data successfully saved to {OUTPUT_FILE_NAME_BIN}")
+    except Exception as e:
+        print(f"Error saving to binary file: {e}")
 
 
 if __name__ == '__main__':
@@ -72,3 +88,4 @@ if __name__ == '__main__':
     filtered_inventory = filter_flammability_above_0_7(sorted_inventory)
     print(filtered_inventory)
     save_to_csv(filtered_inventory)
+    save_to_binary_file(filtered_inventory)
