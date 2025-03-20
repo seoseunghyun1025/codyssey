@@ -5,15 +5,25 @@ INPUT_FILE_NAME = 'week02/Mars_Base_Inventory_List.csv'
 OUTPUT_FILE_NAME_CSV = 'week02/Mars_Base_Inventory_danger.csv'
 OUTPUT_FILE_NAME_BIN = 'week02/Mars_Base_Inventory_List.bin'
 SUCCESS = f'Data successfully saved to {OUTPUT_FILE_NAME_CSV}'
+SEPARATOR = ','
+
+ERROR_MESSAGES = {
+    FileNotFoundError: 'File not found >> {}',
+    PermissionError: 'Permission denied >> {}',
+    Exception: 'Unknown error >> {}',
+}
 
 
 def get_data_from_csv():
     try:
         with open(INPUT_FILE_NAME, 'r', encoding='utf-8') as file:
             data = file.read().splitlines()
-            return [line.split(',') for line in data]
+            return [line.split(SEPARATOR) for line in data]
     except Exception as e:
-        print(f"Error: {e}")
+        error_message = ERROR_MESSAGES.get(
+            type(e), ERROR_MESSAGES[Exception]
+        ).format(INPUT_FILE_NAME)
+        print(error_message)
     return []
 
 
@@ -32,7 +42,10 @@ def get_flammability_values(data):
 
         return [row[1] for row in sorted_flammability_values]
     except Exception as e:
-        print(f"Error: {e}")
+        error_message = ERROR_MESSAGES.get(
+            type(e), ERROR_MESSAGES[Exception]
+        ).format("Flammability values processing")
+        print(error_message)
     return []
 
 
@@ -44,7 +57,10 @@ def filter_flammability_above_0_7(sorted_inventory):
 
         return filtered_inventory
     except Exception as e:
-        print(f"Error: {e}")
+        error_message = ERROR_MESSAGES.get(
+            type(e), ERROR_MESSAGES[Exception]
+        ).format("Filtering by threshold")
+        print(error_message)
     return []
 
 
@@ -52,18 +68,20 @@ def save_to_csv(data):
     try:
         with open(OUTPUT_FILE_NAME_CSV, 'w', encoding='utf-8') as file:
             header = [
-                "Substance",
-                "Weight (g/cm³)",
-                "Specific Gravity",
-                "Strength",
-                "Flammability",
+                'Substance',
+                'Weight (g/cm³)',
+                'Specific Gravity',
+                'Strength',
+                'Flammability',
             ]
-            file.write(','.join(header) + '\n')
+            file.write(SEPARATOR.join(header) + '\n')
             for row in data:
-                file.write(','.join(row) + '\n')
+                file.write(SEPARATOR.join(row) + '\n')
     except Exception as e:
-        print(f"Error saving to CSV: {e}")
-    return []
+        error_message = ERROR_MESSAGES.get(
+            type(e), ERROR_MESSAGES[Exception]
+        ).format(OUTPUT_FILE_NAME_CSV)
+        print(error_message)
 
 
 def save_to_binary_file(data):
@@ -78,7 +96,11 @@ def save_to_binary_file(data):
                 file.write(row_bytes)
         print(SUCCESS)
     except Exception as e:
-        print(f"Error saving to binary file: {e}")
+        error_message = ERROR_MESSAGES.get(
+            type(e), ERROR_MESSAGES[Exception]
+        ).format(OUTPUT_FILE_NAME_BIN)
+        print(error_message)
+    return []
 
 
 def print_from_binary_file():
@@ -95,7 +117,11 @@ def print_from_binary_file():
 
                 print(row_data)
     except Exception as e:
-        print(f"Error reading from binary file: {e}")
+        error_message = ERROR_MESSAGES.get(
+            type(e), ERROR_MESSAGES[Exception]
+        ).format(OUTPUT_FILE_NAME_BIN)
+        print(error_message)
+    return []
 
 
 if __name__ == '__main__':
