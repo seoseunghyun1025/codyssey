@@ -81,6 +81,23 @@ def save_to_binary_file(data):
         print(f"Error saving to binary file: {e}")
 
 
+def read_from_binary_file():
+    try:
+        with open(OUTPUT_FILE_NAME_BIN, 'rb') as file:
+            while True:
+                length_bytes = file.read(4)
+                if not length_bytes:
+                    break
+
+                length = int.from_bytes(length_bytes, 'big')
+                row_bytes = file.read(length)
+                row_data = row_bytes.decode('utf-8')
+
+                print(row_data)  # 읽어낸 데이터를 화면에 출력
+    except Exception as e:
+        print(f"Error reading from binary file: {e}")
+
+
 if __name__ == '__main__':
     inventory_list = get_data_from_csv()
     print(inventory_list)
@@ -89,3 +106,4 @@ if __name__ == '__main__':
     print(filtered_inventory)
     save_to_csv(filtered_inventory)
     save_to_binary_file(filtered_inventory)
+    read_from_binary_file()
