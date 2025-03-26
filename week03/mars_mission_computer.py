@@ -37,6 +37,18 @@ class DummySensor:
         )
 
     def get_env(self):
+        log_line = (
+            f'내부온도: {self.env_values["mars_base_internal_temperature"]}°C | '
+            f'외부온도: {self.env_values["mars_base_external_temperature"]}°C | '
+            f'내부습도: {self.env_values["mars_base_internal_humidity"]}% | '
+            f'외부광량: {self.env_values["mars_base_external_illuminance"]}W/m² | '
+            f'CO2: {self.env_values["mars_base_internal_co2"]}% | '
+            f'산소: {self.env_values["mars_base_internal_oxygen"]}%\n'
+        )
+
+        with open('week03/sensor_log.txt', 'a', encoding='utf-8') as file:
+            file.write(log_line)
+
         return self.env_values
 
 
