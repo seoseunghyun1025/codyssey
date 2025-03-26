@@ -8,7 +8,7 @@
 ## 🧰 수행과제 
 - [x] 더미 센서에 해당하는 클래스를 생성한다. 클래스의 이름은 DummySensor로 정의한다. 
 
-- [ ] DummySensor의 멤버로 env_values라는 사전 객체를 추가한다. 사전 객체에는 다음과 같은 항목들이 추가 되어 있어야 한다. 
+- [x] DummySensor의 멤버로 env_values라는 사전 객체를 추가한다. 사전 객체에는 다음과 같은 항목들이 추가 되어 있어야 한다. 
 ```
     - 화성 기지 내부 온도 (mars_base_internal_temperature)
     - 화성 기지 외부 온도 (mars_base_external_temperature)
