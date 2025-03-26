@@ -38,3 +38,10 @@ class DummySensor:
 
     def get_env(self):
         return self.env_values
+
+
+if __name__ == '__main__':
+    ds = DummySensor('TestSensor')
+    ds.set_env()
+    env_data = ds.get_env()
+    print(env_data)
