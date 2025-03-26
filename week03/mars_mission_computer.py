@@ -52,8 +52,12 @@ class DummySensor:
         return self.env_values
 
 
-if __name__ == '__main__':
+def main():
     ds = DummySensor('TestSensor')
     ds.set_env()
     env_data = ds.get_env()
     print(env_data)
+
+
+if __name__ == '__main__':
+    main()
