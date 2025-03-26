@@ -35,3 +35,6 @@ class DummySensor:
         self.env_values['mars_base_internal_oxygen'] = round(
             random.uniform(4.0, 7.0), 2
         )
+
+    def get_env(self):
+        return self.env_values
