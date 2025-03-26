@@ -17,9 +17,9 @@
     - 화성 기지 내부 이산화탄소 농도 (mars_base_internal_co2)
     - 화성 기지 내부 산소 농도 (mars_base_internal_oxygen)
 ```
-- [ ] DummySensor는 테스트를 위한 객체이므로 데이터를 램덤으로 생성한다. 
+- [x] DummySensor는 테스트를 위한 객체이므로 데이터를 램덤으로 생성한다. 
 
-- [ ] DummySensor 클래스에 set_env() 메소드를 추가한다. set_env() 메소드는 random으로 주어진 범위 안의 값을 생성해서 env_values 항목에 채워주는 역할을 한다. 각 항목의 값의 범위는 다음과 같다. 
+- [x] DummySensor 클래스에 set_env() 메소드를 추가한다. set_env() 메소드는 random으로 주어진 범위 안의 값을 생성해서 env_values 항목에 채워주는 역할을 한다. 각 항목의 값의 범위는 다음과 같다. 
 ```
     - 화성 기지 내부 온도 (18~30도)
     - 화성 기지 외부 온도 (0~21도)
