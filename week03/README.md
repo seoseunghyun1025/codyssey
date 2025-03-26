@@ -28,7 +28,7 @@
     - 화성 기지 내부 이산화탄소 농도 (0.02~0.1%)
     - 화성 기지 내부 산소 농도 (4%~7%)
 ```
-- [ ] DummySensor 클래스는 get_env() 메소드를 추가하는데 get_env() 메소드는 env_values를 return 한다. 
+- [x] DummySensor 클래스는 get_env() 메소드를 추가하는데 get_env() 메소드는 env_values를 return 한다. 
 
 - [ ] DummySensor 클래스를 ds라는 이름으로 인스턴스(Instance)로 만든다. 
 
