@@ -30,9 +30,9 @@
 ```
 - [x] DummySensor 클래스는 get_env() 메소드를 추가하는데 get_env() 메소드는 env_values를 return 한다. 
 
-- [ ] DummySensor 클래스를 ds라는 이름으로 인스턴스(Instance)로 만든다. 
+- [x] DummySensor 클래스를 ds라는 이름으로 인스턴스(Instance)로 만든다. 
 
-- [ ] 인스턴스화 한 DummySensor 클래스에서 set_env()와 get_env()를 차례로 호출해서 값을 확인한다. 
+- [x] 인스턴스화 한 DummySensor 클래스에서 set_env()와 get_env()를 차례로 호출해서 값을 확인한다. 
 
 - [ ] 전체 코드를 mars_mission_computer.py 파일로 저장한다. 
 
