@@ -34,7 +34,7 @@
 
 - [x] 인스턴스화 한 DummySensor 클래스에서 set_env()와 get_env()를 차례로 호출해서 값을 확인한다. 
 
-- [ ] 전체 코드를 mars_mission_computer.py 파일로 저장한다. 
+- [x] 전체 코드를 mars_mission_computer.py 파일로 저장한다. 
 
 ## 🚫 제약사항
 - Python에서 기본 제공되는 명령어만 사용해야 하며 별도의 라이브러리나 패키지를 사용해서는 안된다. 
