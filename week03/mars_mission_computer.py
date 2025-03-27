@@ -37,7 +37,17 @@ class DummySensor:
         )
 
     def get_env(self):
+        year = 2025
+        month = str(random.randint(1, 12)).zfill(2)
+        day = str(random.randint(1, 28)).zfill(2)
+
+        hour = str(random.randint(0, 23)).zfill(2)
+        minute = str(random.randint(0, 59)).zfill(2)
+        second = str(random.randint(0, 59)).zfill(2)
+        fake_timestamp = f'{year}-{month}-{day} {hour}:{minute}:{second}'
+
         log_line = (
+            f'[{fake_timestamp}] '
             f'내부온도: {self.env_values["mars_base_internal_temperature"]}°C | '
             f'외부온도: {self.env_values["mars_base_external_temperature"]}°C | '
             f'내부습도: {self.env_values["mars_base_internal_humidity"]}% | '
