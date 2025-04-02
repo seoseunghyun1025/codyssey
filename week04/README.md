@@ -10,8 +10,8 @@
 ## 🧰 수행 과제
 
 - [x] `MissionComputer`라는 이름의 클래스를 생성한다.
-- [ ] 클래스 내부에 화성 기지 환경 정보를 저장할 수 있는 `env_values`라는 `dict` 객체를 속성으로 추가한다.
-- [ ] `env_values`에는 다음과 같은 항목들이 포함되어야 한다:
+- [x] 클래스 내부에 화성 기지 환경 정보를 저장할 수 있는 `env_values`라는 `dict` 객체를 속성으로 추가한다.
+- [x] `env_values`에는 다음과 같은 항목들이 포함되어야 한다:
 ```
     - mars_base_internal_temperature : 화성 기지 내부 온도
     - mars_base_external_temperature : 화성 기지 외부 온도
