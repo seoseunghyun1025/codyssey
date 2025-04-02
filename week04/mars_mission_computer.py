@@ -1,0 +1,2 @@
+class MissionComputer:
+    pass
