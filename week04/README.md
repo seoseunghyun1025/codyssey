@@ -9,7 +9,7 @@
 
 ## 🧰 수행 과제
 
-- [ ] `MissionComputer`라는 이름의 클래스를 생성한다.
+- [x] `MissionComputer`라는 이름의 클래스를 생성한다.
 - [ ] 클래스 내부에 화성 기지 환경 정보를 저장할 수 있는 `env_values`라는 `dict` 객체를 속성으로 추가한다.
 - [ ] `env_values`에는 다음과 같은 항목들이 포함되어야 한다:
 ```
@@ -29,7 +29,7 @@
 ```
 - [ ] `MissionComputer` 클래스를 `RunComputer`라는 이름으로 인스턴스화한다.
 - [ ] `RunComputer.get_sensor_data()`를 호출하여 환경 정보를 지속적으로 출력하도록 한다.
-- [ ] 전체 코드를 `mars_mission_computer.py` 파일로 저장한다.
+- [x] 전체 코드를 `mars_mission_computer.py` 파일로 저장한다.
 
 ## 🚫 제약사항
 - Python에서 기본 제공되는 명령어만 사용해야 하며 별도의 라이브러리나 패키지를 사용해서는 안된다.
