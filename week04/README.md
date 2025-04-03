@@ -20,8 +20,8 @@
     - mars_base_internal_co2 : 화성 기지 내부 이산화탄소 농도
     - mars_base_internal_oxygen : 화성 기지 내부 산소 농도
 ```
-- [ ] 문제 3에서 제작한 `DummySensor` 클래스를 `ds`라는 이름으로 인스턴스화한다.
-- [ ] `MissionComputer` 클래스에 `get_sensor_data()` 메소드를 정의한다. 이 메소드에는 다음 기능이 포함되어야 한다:
+- [x] 문제 3에서 제작한 `DummySensor` 클래스를 `ds`라는 이름으로 인스턴스화한다.
+- [x] `MissionComputer` 클래스에 `get_sensor_data()` 메소드를 정의한다. 이 메소드에는 다음 기능이 포함되어야 한다:
 ```
     - 센서의 값을 가져와서 env_values에 담는다.
     - env_values의 값을 출력한다. 이때 환경 정보의 값은 json 형태로 화면에 출력한다.
