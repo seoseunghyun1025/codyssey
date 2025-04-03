@@ -81,7 +81,7 @@ class MissionComputer:
 
             print('{')
             for key, value in self.env_values.items():
-                print(f"    '{key}': {repr(value)},")
+                print(f'    `{key}`: {repr(value)},')
             print('}')
 
             time.sleep(5)
@@ -89,6 +89,7 @@ class MissionComputer:
 def main():
     ds = DummySensor()
     print('DummySensor instance created:', ds)
+    RunComputer = MissionComputer()
 
 if __name__ == '__main__':
     main()
