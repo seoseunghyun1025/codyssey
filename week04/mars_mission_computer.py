@@ -72,20 +72,37 @@ class MissionComputer:
             'mars_base_internal_oxygen': None
         }
         self.ds = DummySensor()
+        self.accumulated_data = {
+            key: [] for key in self.env_values
+        }
+        self.counter = 0
         
     def get_sensor_data(self):
-        print("센서 데이터를 출력합니다. 중단하려면 q 를 입력하세요.")
+        print('센서 데이터를 출력합니다. 중단하려면 q 를 입력하세요.')
         while True:
             self.ds.set_env()
             env = self.ds.get_env()
             self.env_values.update(env)
+
+            for key, value in env.items():
+                self.accumulated_data[key].append(value)
 
             print('{')
             for key, value in self.env_values.items():
                 print(f"    '{key}': {repr(value)},")
             print('}')
 
-            user_input = input('계속하려면 Enter, 종료하려면 q 입력: ')
+            self.counter += 1
+            if self.counter >= 60:
+                print('\n[5분 평균값]')
+                for key, values in self.accumulated_data.items():
+                    avg = round(sum(values) / len(values), 2)
+                    print(f"    '{key}': {avg}")
+                print()
+                self.accumulated_data = {key: [] for key in self.accumulated_data}
+                self.counter = 0
+
+            user_input = input(f'[{self.counter * 5}/300초] 종료하려면 q 입력: ')
             if user_input.strip().lower() == 'q':
                 print('System stopped….')
                 break
