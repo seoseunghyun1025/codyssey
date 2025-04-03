@@ -90,6 +90,7 @@ def main():
     ds = DummySensor()
     print('DummySensor instance created:', ds)
     RunComputer = MissionComputer()
-
+    RunComputer.get_sensor_data()
+     
 if __name__ == '__main__':
     main()
