@@ -74,6 +74,7 @@ class MissionComputer:
         self.ds = DummySensor()
         
     def get_sensor_data(self):
+        print("센서 데이터를 출력합니다. 중단하려면 q 를 입력하세요.")
         while True:
             self.ds.set_env()
             env = self.ds.get_env()
@@ -81,8 +82,13 @@ class MissionComputer:
 
             print('{')
             for key, value in self.env_values.items():
-                print(f'    `{key}`: {repr(value)},')
+                print(f"    '{key}': {repr(value)},")
             print('}')
+
+            user_input = input('계속하려면 Enter, 종료하려면 q 입력: ')
+            if user_input.strip().lower() == 'q':
+                print('System stopped….')
+                break
 
             time.sleep(5)
 
