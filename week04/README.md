@@ -28,7 +28,7 @@
     - 위의 두 가지 동작을 5초에 한번씩 반복한다.
 ```
 - [x] `MissionComputer` 클래스를 `RunComputer`라는 이름으로 인스턴스화한다.
-- [ ] `RunComputer.get_sensor_data()`를 호출하여 환경 정보를 지속적으로 출력하도록 한다.
+- [x] `RunComputer.get_sensor_data()`를 호출하여 환경 정보를 지속적으로 출력하도록 한다.
 - [x] 전체 코드를 `mars_mission_computer.py` 파일로 저장한다.
 
 ## 🚫 제약사항
