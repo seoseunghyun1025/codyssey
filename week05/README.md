@@ -8,7 +8,7 @@
 한송희 박사는 컴퓨터의 상태를 파악할 수 있는 코드를 직접 작성해 보기로 한다.
 
 ## 🧰 수행 과제
-- [ ] 파이썬 코드를 사용해서 다음과 같은 미션 컴퓨터의 정보를 알아보는 메소드를 get_mission_computer_info()  라는 이름으로 만들고 문제 7에서 완성한 MissionComputer 클래스에 추가한다. 
+- [x] 파이썬 코드를 사용해서 다음과 같은 미션 컴퓨터의 정보를 알아보는 메소드를 get_mission_computer_info()  라는 이름으로 만들고 문제 7에서 완성한 MissionComputer 클래스에 추가한다. 
 
     - 필요한 미션 컴퓨터의 시스템 정보
     ```
@@ -18,7 +18,7 @@
         CPU의 코어 수
         메모리의 크기
     ```
-- [ ] get_mission_computer_info()에 가져온 시스템 정보를 JSON 형식으로 출력하는 코드를 포함한다. 
+- [x] get_mission_computer_info()에 가져온 시스템 정보를 JSON 형식으로 출력하는 코드를 포함한다. 
 - [ ] 미션 컴퓨터의 부하를 가져오는 코드를 get_mission_computer_load() 메소드로 만들고 MissionComputer 클래스에 추가한다
 - [ ] get_mission_computer_load() 메소드의 경우 다음과 같은 정보들을 가져 올 수 있게한다. 
 ```

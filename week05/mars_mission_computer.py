@@ -3,6 +3,7 @@ import time
 import platform
 import psutil
 
+
 class DummySensor:
 
     def __init__(self, name='DefaultSensor'):
@@ -63,6 +64,7 @@ class DummySensor:
 
         return self.env_values
 
+
 class MissionComputer:
     def __init__(self):
         self.env_values = {
@@ -71,14 +73,12 @@ class MissionComputer:
             'mars_base_internal_humidity': None,
             'mars_base_external_illuminance': None,
             'mars_base_internal_co2': None,
-            'mars_base_internal_oxygen': None
+            'mars_base_internal_oxygen': None,
         }
         self.ds = DummySensor()
-        self.accumulated_data = {
-            key: [] for key in self.env_values
-        }
+        self.accumulated_data = {key: [] for key in self.env_values}
         self.counter = 0
-        
+
     def get_sensor_data(self):
         print('센서 데이터를 출력합니다. 중단하려면 q 를 입력하세요.')
         while True:
@@ -101,16 +101,20 @@ class MissionComputer:
                     avg = round(sum(values) / len(values), 2)
                     print(f"    '{key}': {avg}")
                 print()
-                self.accumulated_data = {key: [] for key in self.accumulated_data}
+                self.accumulated_data = {
+                    key: [] for key in self.accumulated_data
+                }
                 self.counter = 0
 
-            user_input = input(f'[{self.counter * 5}/300초] 종료하려면 q 입력: ')
+            user_input = input(
+                f'[{self.counter * 5}/300초] 종료하려면 q 입력: '
+            )
             if user_input.strip().lower() == 'q':
                 print('System stopped….')
                 break
 
             time.sleep(5)
-            
+
     def get_mission_computer_info(self):
         try:
             system_info = {
@@ -118,7 +122,9 @@ class MissionComputer:
                 '운영체계 버전': platform.version(),
                 'CPU 타입': platform.processor(),
                 'CPU 코어 수': os.cpu_count(),
-                '메모리 크기(GB)': round(psutil.virtual_memory().total / (1024 ** 3), 2)
+                '메모리 크기(GB)': round(
+                    psutil.virtual_memory().total / (1024**3), 2
+                ),
             }
             json_info = json.dumps(system_info, ensure_ascii=False, indent=4)
             print('[시스템 정보]')
@@ -128,11 +134,12 @@ class MissionComputer:
             print('시스템 정보를 가져오는 도중 오류가 발생했습니다:', e)
             return {}
 
+
 def main():
     ds = DummySensor()
-    print('DummySensor instance created:', ds)
     RunComputer = MissionComputer()
     RunComputer.get_sensor_data()
-     
+
+
 if __name__ == '__main__':
     main()
