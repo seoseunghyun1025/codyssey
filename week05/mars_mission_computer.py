@@ -1,5 +1,7 @@
 import random
 import time
+import platform
+import psutil
 
 class DummySensor:
 
@@ -108,6 +110,23 @@ class MissionComputer:
                 break
 
             time.sleep(5)
+            
+    def get_mission_computer_info(self):
+        try:
+            system_info = {
+                '운영체계': platform.system(),
+                '운영체계 버전': platform.version(),
+                'CPU 타입': platform.processor(),
+                'CPU 코어 수': os.cpu_count(),
+                '메모리 크기(GB)': round(psutil.virtual_memory().total / (1024 ** 3), 2)
+            }
+            json_info = json.dumps(system_info, ensure_ascii=False, indent=4)
+            print('[시스템 정보]')
+            print(json_info)
+            return system_info
+        except Exception as e:
+            print('시스템 정보를 가져오는 도중 오류가 발생했습니다:', e)
+            return {}
 
 def main():
     ds = DummySensor()
