@@ -129,10 +129,26 @@ class MissionComputer:
                 ),
             }
 
+            try:
+                with open('week05/setting.txt', 'r', encoding='utf-8') as f:
+                    selected_keys = [line.strip() for line in f.readlines()]
+            except FileNotFoundError:
+                print('[경고] setting.txt 파일이 없어 모든 항목을 출력합니다.')
+                selected_keys = list(system_info.keys())
+
             print('[시스템 정보]')
-            for key, value in system_info.items():
-                print(f'  {key}: {value}')
-            return system_info
+            for key in selected_keys:
+                if key in system_info:
+                    print(f'  {key}: {system_info[key]}')
+                else:
+                    print(f'  {key}: (알 수 없는 항목)')
+
+            return {
+                key: system_info.get(key)
+                for key in selected_keys
+                if key in system_info
+            }
+
         except Exception as e:
             print('시스템 정보를 가져오는 도중 오류가 발생했습니다:', e)
             return {}
