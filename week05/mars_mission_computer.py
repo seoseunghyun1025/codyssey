@@ -134,6 +134,20 @@ class MissionComputer:
             print('시스템 정보를 가져오는 도중 오류가 발생했습니다:', e)
             return {}
 
+    def get_mission_computer_load(self):
+        try:
+            load_info = {
+                'CPU 실시간 사용량(%)': psutil.cpu_percent(interval=1),
+                '메모리 실시간 사용량(%)': psutil.virtual_memory().percent,
+            }
+            json_load = json.dumps(load_info, ensure_ascii=False, indent=4)
+            print('[시스템 부하 정보]')
+            print(json_load)
+            return load_info
+        except Exception as e:
+            print('시스템 부하 정보를 가져오는 도중 오류가 발생했습니다:', e)
+            return {}
+
 
 def main():
     ds = DummySensor()
