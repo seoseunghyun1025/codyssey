@@ -2,6 +2,8 @@ import random
 import time
 import platform
 import psutil
+import os
+import json
 
 
 class DummySensor:
@@ -126,9 +128,10 @@ class MissionComputer:
                     psutil.virtual_memory().total / (1024**3), 2
                 ),
             }
-            json_info = json.dumps(system_info, ensure_ascii=False, indent=4)
+
             print('[시스템 정보]')
-            print(json_info)
+            for key, value in system_info.items():
+                print(f'  {key}: {value}')
             return system_info
         except Exception as e:
             print('시스템 정보를 가져오는 도중 오류가 발생했습니다:', e)
@@ -140,9 +143,10 @@ class MissionComputer:
                 'CPU 실시간 사용량(%)': psutil.cpu_percent(interval=1),
                 '메모리 실시간 사용량(%)': psutil.virtual_memory().percent,
             }
-            json_load = json.dumps(load_info, ensure_ascii=False, indent=4)
+
             print('[시스템 부하 정보]')
-            print(json_load)
+            for key, value in load_info.items():
+                print(f'  {key}: {value}')
             return load_info
         except Exception as e:
             print('시스템 부하 정보를 가져오는 도중 오류가 발생했습니다:', e)
@@ -152,7 +156,11 @@ class MissionComputer:
 def main():
     ds = DummySensor()
     RunComputer = MissionComputer()
-    RunComputer.get_sensor_data()
+
+    RunComputer.get_mission_computer_info()
+    RunComputer.get_mission_computer_load()
+
+    # RunComputer.get_sensor_data()
 
 
 if __name__ == '__main__':
