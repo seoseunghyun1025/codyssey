@@ -26,10 +26,10 @@
     메모리 실시간 사용량 
 ```
 - [x] get_mission_computer_load()에 해당 결과를 JSON 형식으로 출력하는 코드를 추가한다. 
-- [ ] get_mission_computer_info(), get_mission_computer_load()를 호출해서 출력이 잘되는지 확인한다.  
-- [ ] MissionComputer 클래스를 runComputer 라는 이름으로 인스턴스화 한다.  
-- [ ] runComputer 인스턴스의 get_mission_computer_info(), get_mission_computer_load() 메소드를 호출해서 시스템 정보에 대한 값을 출력 할 수 있도록 한다.
-- [ ] 최종적으로 결과를 mars_mission_computer.py 에 저장한다.
+- [x] get_mission_computer_info(), get_mission_computer_load()를 호출해서 출력이 잘되는지 확인한다.  
+- [x] MissionComputer 클래스를 runComputer 라는 이름으로 인스턴스화 한다.  
+- [x] runComputer 인스턴스의 get_mission_computer_info(), get_mission_computer_load() 메소드를 호출해서 시스템 정보에 대한 값을 출력 할 수 있도록 한다.
+- [x] 최종적으로 결과를 mars_mission_computer.py 에 저장한다.
 
 ## 🚫 제약사항
 - python에서 기본 제공되는 명령어 이외의 별도의 라이브러리나 패키지를 사용해서는 안된다. 
