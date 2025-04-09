@@ -93,7 +93,7 @@ class MissionComputer:
             print('}')
 
             self.counter += 1
-            if self.counter >= 60:
+            if self.counter >= 3:
                 print('\n[5분 평균값]')
                 for key, values in self.accumulated_data.items():
                     avg = round(sum(values) / len(values), 2)
