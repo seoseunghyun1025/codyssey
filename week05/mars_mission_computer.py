@@ -171,12 +171,12 @@ class MissionComputer:
 
 def main():
     ds = DummySensor()
-    RunComputer = MissionComputer()
+    runComputer = MissionComputer()
 
-    RunComputer.get_mission_computer_info()
-    RunComputer.get_mission_computer_load()
+    runComputer.get_mission_computer_info()
+    runComputer.get_mission_computer_load()
 
-    # RunComputer.get_sensor_data()
+    runComputer.get_sensor_data()
 
 
 if __name__ == '__main__':
