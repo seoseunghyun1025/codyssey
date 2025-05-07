@@ -13,8 +13,8 @@
 
 ## 🧰 수행 과제
 
-- [ ] Calculator 클래스를 만든다.
-- [ ] Calculator 클래스에 사칙 연산을 담당할 메소드인 add(), subtract(), multiply(), divide() 를 추가하고 동작할 수 있게 기능을 구현한다.
+- [x] Calculator 클래스를 만든다.
+- [x] Calculator 클래스에 사칙 연산을 담당할 메소드인 add(), subtract(), multiply(), divide() 를 추가하고 동작할 수 있게 기능을 구현한다.
 - [ ] Calculator 클래스에 추가로 초기화 및 음수양수, 퍼센트 등을 담당할 reset(), negative-positive(), percent() 메소드를 추가하고 기능을 구현한다.
 - [ ] 숫자키를 누를 때 마다 화면에 숫자가 누적된다.
 - [ ] 소수점 키를 누르면 소수점이 입력된다. 단 이미 소수점이 입력되어 있는 상태에서는 추가로 입력되지 않는다.
