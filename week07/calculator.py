@@ -153,6 +153,30 @@ class Calculator(QWidget):
         else:
             return self.result.text()
 
+    def reset(self):
+        self.result.clear()
+        self.current_value = ''
+        self.pending_operator = ''
+        self.last_operand = ''
+
+    def negative_positive(self):
+        current_text = self.result.text().replace(',', '')
+        if not current_text:
+            return
+        if current_text.startswith('-'):
+            self.result.setText(current_text[1:])
+        else:
+            self.result.setText('-' + current_text)
+
+    def percent(self):
+        current_text = self.result.text().replace(',', '')
+        try:
+            value = float(current_text)
+            percent_value = value / 100
+            self.result.setText(str(percent_value))
+        except ValueError:
+            pass  # 아무 것도 하지 않음 (잘못된 값)
+
 
 if __name__ == '__main__':
     app = QApplication([])
