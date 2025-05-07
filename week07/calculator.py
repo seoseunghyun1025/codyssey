@@ -12,11 +12,13 @@ class Calculator(QWidget):
     def __init__(self):
         super().__init__()
         self.initUI()
+        self.current_value = ''
+        self.pending_operator = ''
+        self.last_operand = ''
 
     def initUI(self):
         self.setWindowTitle('iPhone Style Calculator')
         self.setGeometry(300, 300, 400, 500)
-
         self.setStyleSheet('background-color: black;')
 
         grid = QGridLayout()
@@ -64,31 +66,18 @@ class Calculator(QWidget):
                 grid.addWidget(button, row, col)
 
         self.set_button_styles()
-
         self.show()
 
     def set_button_styles(self):
-        special_buttons = ['AC', '±', '%', '÷', '×', '-', '+']
         for button in self.findChildren(QPushButton):
-            if (
-                button.text() == 'AC'
-                or button.text() == '±'
-                or button.text() == '%'
-            ):
+            text = button.text()
+            if text in ['AC', '±', '%']:
                 button.setStyleSheet(
                     'font-size: 24px; border-radius: 40px; background-color: #808080; color: white; width: 80px; height: 80px;'
                 )
-            elif button.text() in ['÷', '×', '-', '+']:
+            elif text in ['÷', '×', '-', '+', '=']:
                 button.setStyleSheet(
                     'font-size: 24px; border-radius: 40px; background-color: #FF9500; color: white; width: 80px; height: 80px;'
-                )
-            elif button.text() == '=':
-                button.setStyleSheet(
-                    'font-size: 24px; border-radius: 40px; background-color: #FF9500; color: white; width: 80px; height: 80px;'
-                )
-            else:
-                button.setStyleSheet(
-                    'font-size: 24px; border-radius: 40px; background-color: #333333; color: white; width: 80px; height: 80px;'
                 )
 
     def on_click(self):
@@ -111,50 +100,16 @@ class Calculator(QWidget):
             result = self.equal()
             self.result.setText(result)
         else:
-            # 🔢 숫자 또는 . 입력 처리
-            if button_text == '.' and '.' in current_text:
-                return  # 소수점 중복 방지
+            # 숫자 및 소수점 입력 처리
+            if button_text == '.':
+                if '.' in current_text:
+                    return
+                elif current_text == '':
+                    self.result.setText('0.')
+                    return
 
-            # 기존 값이 0이면 덮어쓰기, 아니면 이어붙이기
-            if current_text == '0' and button_text != '.':
-                new_text = button_text
-            else:
-                new_text = current_text + button_text
-
+            new_text = current_text + button_text
             self.result.setText(new_text)
-
-    def add(self, a, b):
-        return str(float(a) + float(b))
-
-    def subtract(self, a, b):
-        return str(float(a) - float(b))
-
-    def multiply(self, a, b):
-        return str(float(a) * float(b))
-
-    def divide(self, a, b):
-        if float(b) == 0:
-            return 'Error'
-        return str(float(a) / float(b))
-
-    def equal(self):
-        if not self.current_value or not self.last_operand or not self.pending_operator:
-            return self.result.text()
-
-        a = self.current_value
-        b = self.last_operand
-        op = self.pending_operator
-
-        if op == '+':
-            return self.add(a, b)
-        elif op == '-':
-            return self.subtract(a, b)
-        elif op == '×':
-            return self.multiply(a, b)
-        elif op == '÷':
-            return self.divide(a, b)
-        else:
-            return self.result.text()
 
     def reset(self):
         self.result.clear()
@@ -178,7 +133,58 @@ class Calculator(QWidget):
             percent_value = value / 100
             self.result.setText(str(percent_value))
         except ValueError:
-            pass  # 아무 것도 하지 않음 (잘못된 값)
+            pass
+
+    def add(self, a, b):
+        return str(float(a) + float(b))
+
+    def subtract(self, a, b):
+        return str(float(a) - float(b))
+
+    def multiply(self, a, b):
+        return str(float(a) * float(b))
+
+    def divide(self, a, b):
+        if float(b) == 0:
+            return 'Error'
+        return str(float(a) / float(b))
+
+    def equal(self):
+        if not self.current_value or not self.result.text():
+            return self.result.text()
+
+        a = self.current_value
+        b = self.result.text().replace(',', '')
+        op = self.pending_operator
+
+        try:
+            if op == '+':
+                result = self.add(a, b)
+            elif op == '-':
+                result = self.subtract(a, b)
+            elif op == '×':
+                result = self.multiply(a, b)
+            elif op == '÷':
+                result = self.divide(a, b)
+            else:
+                return self.result.text()
+        except Exception:
+            return 'Error'
+
+        # 소수점 6자리 이내로 반올림
+        try:
+            result_float = float(result)
+            if result_float.is_integer():
+                result = str(int(result_float))
+            else:
+                result = str(round(result_float, 6))
+        except:
+            pass
+
+        self.current_value = ''
+        self.pending_operator = ''
+        self.last_operand = ''
+        return result
 
 
 if __name__ == '__main__':
