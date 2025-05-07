@@ -92,36 +92,36 @@ class Calculator(QWidget):
                 )
 
     def on_click(self):
-    sender = self.sender()
-    button_text = sender.text()
-    current_text = self.result.text().replace(',', '')
+        sender = self.sender()
+        button_text = sender.text()
+        current_text = self.result.text().replace(',', '')
 
-    if button_text == 'AC':
-        self.reset()
-    elif button_text == '±':
-        self.negative_positive()
-    elif button_text == '%':
-        self.percent()
-    elif button_text in ['+', '-', '×', '÷']:
-        self.current_value = current_text
-        self.pending_operator = button_text
-        self.result.clear()
-    elif button_text == '=':
-        self.last_operand = current_text
-        result = self.equal()
-        self.result.setText(result)
-    else:
-        # 🔢 숫자 또는 . 입력 처리
-        if button_text == '.' and '.' in current_text:
-            return  # 소수점 중복 방지
-
-        # 기존 값이 0이면 덮어쓰기, 아니면 이어붙이기
-        if current_text == '0' and button_text != '.':
-            new_text = button_text
+        if button_text == 'AC':
+            self.reset()
+        elif button_text == '±':
+            self.negative_positive()
+        elif button_text == '%':
+            self.percent()
+        elif button_text in ['+', '-', '×', '÷']:
+            self.current_value = current_text
+            self.pending_operator = button_text
+            self.result.clear()
+        elif button_text == '=':
+            self.last_operand = current_text
+            result = self.equal()
+            self.result.setText(result)
         else:
-            new_text = current_text + button_text
+            # 🔢 숫자 또는 . 입력 처리
+            if button_text == '.' and '.' in current_text:
+                return  # 소수점 중복 방지
 
-        self.result.setText(new_text)
+            # 기존 값이 0이면 덮어쓰기, 아니면 이어붙이기
+            if current_text == '0' and button_text != '.':
+                new_text = button_text
+            else:
+                new_text = current_text + button_text
+
+            self.result.setText(new_text)
 
     def add(self, a, b):
         return str(float(a) + float(b))
