@@ -1,6 +1,5 @@
 import zipfile
 import time
-from itertools import product
 
 
 def unlock_zip():
@@ -10,6 +9,7 @@ def unlock_zip():
 
     start_time = time.time()
     attempt_count = 0
+    found_password = None
 
     def try_password(zip_file, password):
         try:
@@ -22,29 +22,43 @@ def unlock_zip():
         except Exception:
             return False
 
+    def recurse(current):
+        nonlocal attempt_count, found_password
+        if found_password is not None:
+            return
+        if len(current) == password_length:
+            attempt_count += 1
+            if attempt_count % 10000 == 0:
+                elapsed = time.time() - start_time
+                print(
+                    f'Attempts: {attempt_count}, Time elapsed: {elapsed:.2f} seconds'
+                )
+            if try_password(zf, current):
+                found_password = current
+                elapsed = time.time() - start_time
+                print(f'Password found: {current}')
+                print(f'Total attempts: {attempt_count}')
+                print(f'Time elapsed: {elapsed:.2f} seconds')
+
+                # 암호 찾았을 때 파일로 저장
+                with open('password.txt', 'w') as f:
+                    f.write(current)
+
+            return
+
+        for c in chars:
+            if found_password is None:
+                recurse(current + c)
+
     try:
         with zipfile.ZipFile(zip_filename) as zf:
-            for pwd_tuple in product(chars, repeat=password_length):
-                pwd = ''.join(pwd_tuple)
-                attempt_count += 1
-                if try_password(zf, pwd):
-                    elapsed = time.time() - start_time
-                    print(f'Password found: {pwd}')
-                    print(f'Total attempts: {attempt_count}')
-                    print(f'Time elapsed: {elapsed:.2f} seconds')
-                    return pwd
-                if attempt_count % 10000 == 0:
-                    elapsed = time.time() - start_time
-                    print(
-                        f'Attempts: {attempt_count}, Time elapsed: {elapsed:.2f} seconds'
-                    )
-
-            print('Password not found.')
-            elapsed = time.time() - start_time
-            print(f'Total attempts: {attempt_count}')
-            print(f'Time elapsed: {elapsed:.2f} seconds')
-            return None
-
+            recurse('')
+            if found_password is None:
+                print('Password not found.')
+                elapsed = time.time() - start_time
+                print(f'Total attempts: {attempt_count}')
+                print(f'Time elapsed: {elapsed:.2f} seconds')
+            return found_password
     except FileNotFoundError:
         print('Error: File not found.')
     except zipfile.BadZipFile:
